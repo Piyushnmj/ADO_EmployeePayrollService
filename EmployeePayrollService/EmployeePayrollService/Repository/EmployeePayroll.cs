@@ -217,5 +217,49 @@ namespace EmployeePayrollService.Repository
                 }
             }
         }
+
+        public void AggregateFunction(char gen)
+        {
+            string output = string.Empty;
+            SqlConnection objConnection = new SqlConnection(connectionString);
+            try
+            {
+                EmployeeModel objEmployeeModel = new EmployeeModel();
+                using (objConnection)
+                {
+                    string query = @$"SELECT SUM(Basic_Pay),MAX(Basic_Pay),MIN(Basic_Pay),AVG(Basic_Pay),Gender,COUNT(*) FROM employee_payroll WHERE Gender ='{gen}' GROUP BY Gender";
+
+                    SqlCommand objCommand = new SqlCommand(query, objConnection);
+                    objConnection.Open();
+                    SqlDataReader objDataReader = objCommand.ExecuteReader();
+
+                    if (objDataReader.HasRows)
+                    {
+                        Console.WriteLine($"For {gen} Employees ==>\n");
+                        while (objDataReader.Read())
+                        {
+                            Console.WriteLine($"Total Salary   : {objDataReader[0]}\n" +
+                                              $"Max Salary     : {objDataReader[1]}\n" +
+                                              $"Min Salary     : {objDataReader[2]}\n" +
+                                              $"Average Salary : {objDataReader[3]}\n" +
+                                              $"Gender         : {objDataReader[4]}\n" +
+                                              $"Count          : {objDataReader[5]}\n");
+                        }
+                        objDataReader.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                if (objConnection.State == ConnectionState.Open)
+                {
+                    objConnection.Close();
+                }
+            }
+        }
     }
 }
