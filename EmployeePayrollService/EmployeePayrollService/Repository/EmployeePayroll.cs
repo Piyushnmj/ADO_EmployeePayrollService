@@ -220,7 +220,6 @@ namespace EmployeePayrollService.Repository
 
         public void AggregateFunction(char gen)
         {
-            string output = string.Empty;
             SqlConnection objConnection = new SqlConnection(connectionString);
             try
             {
