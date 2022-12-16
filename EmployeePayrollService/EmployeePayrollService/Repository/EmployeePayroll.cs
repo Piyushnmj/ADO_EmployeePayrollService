@@ -77,5 +77,41 @@ namespace EmployeePayrollService.Repository
                 }
             }
         }
+
+        public string UpdateEmployeeSalary()
+        {
+            SqlConnection objConnection = new SqlConnection(connectionString);
+            //EmployeeModel objEmployeeModel = new EmployeeModel();
+            using (objConnection)
+            {
+                string query = @"Update employee_payroll Set Basic_Pay = 3000000 Where Name = 'Terisa' and Id = 2";
+
+                SqlCommand objCommand = new SqlCommand(query, objConnection);
+                objConnection.Open();
+                try
+                {
+                    var objDataReader = objCommand.ExecuteNonQuery();
+                    if (objDataReader >=1 )
+                    {
+                        return "Date update status: Successfull";
+                    }
+                    else
+                    {
+                        return "Data update status: Failed";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    if (objConnection.State == ConnectionState.Open)
+                    {
+                        objConnection.Close();
+                    }
+                }
+            }
+        }
     }
 }

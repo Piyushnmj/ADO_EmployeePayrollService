@@ -10,6 +10,7 @@ namespace EmployeePayrollService
 
             EmployeePayroll objEmployee = new EmployeePayroll();
             objEmployee.GetAllEmployee();
+            objEmployee.UpdateEmployeeSalary();
         }
     }
 }
