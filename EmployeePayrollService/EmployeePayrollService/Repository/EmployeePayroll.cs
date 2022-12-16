@@ -60,7 +60,7 @@ namespace EmployeePayrollService.Repository
                                               $"Start       : {objEmployeeModel.Start}\n" +
                                               $"City        : {objEmployeeModel.City}\n" +
                                               $"Country     : {objEmployeeModel.Country}\n" +
-                                              "\n********************\n");
+                                              "\n**********************\n");
                         }
                     }
                 }
