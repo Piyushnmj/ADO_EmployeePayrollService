@@ -22,7 +22,7 @@ namespace EmployeePayrollService.Repository
                 using (objConnection)
                 {
                     string query = @"SELECT * FROM employee_payroll";
-                    
+
                     SqlCommand objCommand = new SqlCommand(query, objConnection);
                     objConnection.Open();
                     SqlDataReader objDataReader = objCommand.ExecuteReader();
@@ -91,7 +91,45 @@ namespace EmployeePayrollService.Repository
                 try
                 {
                     var objDataReader = objCommand.ExecuteNonQuery();
-                    if (objDataReader >=1 )
+                    if (objDataReader >= 1)
+                    {
+                        return "Date update status: Successfull";
+                    }
+                    else
+                    {
+                        return "Data update status: Failed";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    if (objConnection.State == ConnectionState.Open)
+                    {
+                        objConnection.Close();
+                    }
+                }
+            }
+        }
+
+        public string UpdateSalaryUsingStoredProcedure()
+        {
+            SqlConnection objConnection = new SqlConnection(connectionString);
+            EmployeeModel objEmployeeModel = new EmployeeModel();
+            using (objConnection)
+            {
+                SqlCommand objCommand = new SqlCommand("UpdateSalary", objConnection);
+                objCommand.CommandType = CommandType.StoredProcedure;
+                objCommand.Parameters.AddWithValue("@ID", 2);
+                objCommand.Parameters.AddWithValue("@Name", "Terisa");
+                objCommand.Parameters.AddWithValue("@Salary", 3000000);
+                objConnection.Open();
+                try
+                {
+                    var objDataReader = objCommand.ExecuteNonQuery();
+                    if (objDataReader >= 1)
                     {
                         return "Date update status: Successfull";
                     }
