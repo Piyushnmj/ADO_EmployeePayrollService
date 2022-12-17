@@ -260,5 +260,40 @@ namespace EmployeePayrollService.Repository
                 }
             }
         }
+
+        public string InsertEmployee()
+        {
+            SqlConnection objConnection = new SqlConnection(connectionString);
+            using (objConnection)
+            {
+                string query = @"INSERT Into employee_payroll (Name, Basic_Pay, Start, Gender, Department, Deductions, Taxable_Pay, Tax, Net_Pay) Values ('Piyush', 4000000, '2021-01-03', 'M', 'ENGINEER', 1000000, 3000000, 500000, 2500000)";
+
+                SqlCommand objCommand = new SqlCommand(query, objConnection);
+                objConnection.Open();
+                try
+                {
+                    var objDataReader = objCommand.ExecuteNonQuery();
+                    if (objDataReader >= 1)
+                    {
+                        return "Date update status: Successfull";
+                    }
+                    else
+                    {
+                        return "Data update status: Failed";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    if (objConnection.State == ConnectionState.Open)
+                    {
+                        objConnection.Close();
+                    }
+                }
+            }
+        }
     }
 }

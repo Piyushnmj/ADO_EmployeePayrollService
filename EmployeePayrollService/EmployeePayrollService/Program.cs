@@ -13,8 +13,9 @@ namespace EmployeePayrollService
             //objEmployee.UpdateEmployeeSalary();
             //objEmployee.UpdateSalaryUsingStoredProcedure();
             objEmployee.GetAllEmployeeByDate();
-            objEmployee.AggregateFunction('M');
-            objEmployee.AggregateFunction('F');
+            //objEmployee.AggregateFunction('M');
+            //objEmployee.AggregateFunction('F');
+            objEmployee.InsertEmployee();
         }
     }
 }

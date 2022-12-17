@@ -23,5 +23,13 @@ namespace DataBaseTesting
 
             Assert.AreEqual("Date update status: Successfull", actual);
         }
+
+        [TestMethod]
+        public void CheckIfNewEmployee_AddedSuccessfully()
+        {
+            EmployeePayroll objEmployee = new EmployeePayroll();
+            string actual = objEmployee.InsertEmployee();
+            Assert.AreEqual("Date update status: Successfull", actual);
+        }
     }
 }
